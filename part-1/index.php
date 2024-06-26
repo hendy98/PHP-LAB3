@@ -20,6 +20,9 @@
             $nameErr = "Name is required";
         } else {
             $name = test_input($_POST["name"]);
+            if (!preg_match("/^[a-zA-Z ]*$/", $name)) {
+                $nameErr = "Only letters and white space allowed";
+            }
         }
 
         if (empty($_POST["email"])) {
@@ -46,7 +49,7 @@
             $courses = $_POST["courses"];
         }
 
-        if ($name && $email && $gender && $agree) {
+        if ($name && $email && $gender && $agree && !$nameErr) {
             echo "<h2>Your given values are as:</h2>";
             echo "Name: " . $name . "<br>";
             echo "E-mail: " . $email . "<br>";
